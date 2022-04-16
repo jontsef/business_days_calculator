@@ -30,5 +30,5 @@ class handler(BaseHTTPRequestHandler):
         else:
             raise Exception('Invalid input provided')
 
-        self.wfile.write(res)
+        self.wfile.write(str(res))
         return
