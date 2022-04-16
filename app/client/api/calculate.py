@@ -31,5 +31,5 @@ class handler(BaseHTTPRequestHandler):
         else:
             raise Exception('Invalid input provided')
 
-        self.wfile.write(json.dumps({ "res": res }))
+        self.wfile.write(json.dumps({ "res": res }).encode())
         return
