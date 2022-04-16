@@ -1,12 +1,20 @@
 from http.server import BaseHTTPRequestHandler
-from cowpy import cow
+from urllib import parse
 
 class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.send_response(200)
-        self.send_header('Content-type','text/plain')
+        self.send_header('Content-type', 'application/json')
         self.end_headers()
-        message = cow.Cowacter().milk('Hello from Python from a Serverless Function!')
+
+        s = self.path
+        query = dict(parse.parse_qsl(parse.urlsplit(s).query))
+
+        if "name" in query:
+            message = "Hello, " + query["name"] + "!"
+        else:
+            message = "Hello, stranger!"
+
         self.wfile.write(message.encode())
         return
