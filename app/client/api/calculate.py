@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 from urllib import parse
+import json
 
 import functions
 
@@ -30,5 +31,5 @@ class handler(BaseHTTPRequestHandler):
         else:
             raise Exception('Invalid input provided')
 
-        self.wfile.write(str(res))
+        self.wfile.write(json.dumps({ "res": res }))
         return
